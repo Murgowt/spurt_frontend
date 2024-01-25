@@ -37,6 +37,12 @@ const config: Config = {
       '5xl': ['64px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
       xxl: ['106px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
     },
+    extend: {
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+        sans: ['Open Sans', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };

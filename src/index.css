@@ -12,8 +12,7 @@
   }
 }
 
-/* TODO: add fonts */
-
 html {
   scroll-behavior: smooth;
+  font-family: 'Roboto';
 }
