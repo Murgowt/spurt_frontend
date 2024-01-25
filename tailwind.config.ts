@@ -7,9 +7,24 @@ const config: Config = {
       tablet: '768px',
       desktop: '1124px',
     },
-
-    // TODO: add colors and font
-
+    colors: {
+      purple300: '#3A004F',
+      purple200: '#9400D3',
+      purple100: '#9747FF',
+      blue300: '#330066',
+      blue200: '#6C5EF1',
+      blue100: '#0FADEF',
+      brown300: '#2C0613',
+      brown200: '#6A2346',
+      brown100: '#760A3F',
+      pink300: '#C82091',
+      pink200: '#F7007A',
+      green300: '#09BA1B',
+      red300: '#FF0000',
+      yellow300: '#FFBD37',
+      bgPurple: '#F7E7FF',
+      bgYellow: '#FFF1CD',
+    },
     fontSize: {
       xs: ['12px', { lineHeight: '20px', letterSpacing: '-0.03em' }],
       sm: ['14px', { lineHeight: '24px', letterSpacing: '-0.03em' }],
