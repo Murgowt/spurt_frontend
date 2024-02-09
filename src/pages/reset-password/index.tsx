@@ -7,7 +7,7 @@ export interface ResetPasswordPageProps {}
 const ResetPasswordPage: FC<ResetPasswordPageProps> = () => {
   return (
     <>
-      <SeoComponent title="Login" href="login" />
+      <SeoComponent title="Reset Password" href="reset-password" />
       <div className="">Reset Password Page</div>
     </>
   );

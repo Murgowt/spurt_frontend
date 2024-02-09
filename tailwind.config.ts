@@ -8,6 +8,8 @@ const config: Config = {
       desktop: '1124px',
     },
     colors: {
+      white: '#FFFFFF',
+      black: '#000000',
       purple300: '#3A004F',
       purple200: '#9400D3',
       purple100: '#9747FF',
@@ -24,6 +26,7 @@ const config: Config = {
       yellow300: '#FFBD37',
       bgPurple: '#F7E7FF',
       bgYellow: '#FFF1CD',
+      bgWhite: '#FCF5FF',
     },
     fontSize: {
       xs: ['12px', { lineHeight: '20px', letterSpacing: '-0.03em' }],

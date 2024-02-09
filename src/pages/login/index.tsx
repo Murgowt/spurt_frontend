@@ -8,7 +8,7 @@ const LoginPage: FC<LoginPageProps> = () => {
   return (
     <>
       <SeoComponent title="Login" href="login" />
-      <div className="">Login Page</div>
+      <div className="px-4 tablet:px-10 desktop:px-20">Login Page</div>
     </>
   );
 };
