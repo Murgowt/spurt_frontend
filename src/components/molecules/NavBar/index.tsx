@@ -6,6 +6,8 @@ import BrandLogo from '@components/atoms/BrandLogo';
 import NavBarLink from '@components/atoms/NavBarLink';
 import Button from '@components/atoms/Button';
 
+import { useAuthStore } from '@store/authStore';
+
 import {
   HOME_PAGE,
   LOGIN_PAGE,
@@ -18,6 +20,9 @@ export interface NavBarProps {}
 const NavBar: FC<NavBarProps> = () => {
   const location = useLocation();
 
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -29,26 +34,31 @@ const NavBar: FC<NavBarProps> = () => {
         <BrandLogo link={HOME_PAGE} />
         <div>
           <ul className="hidden item-center text-brown300 tablet:flex desktop:flex">
-            <NavBarLink
-              type="desktop"
-              href={REGISTER_PHARMACIST_PAGE}
-              active={location.pathname === REGISTER_PHARMACIST_PAGE}
-            >
-              Register Pharmacist
-            </NavBarLink>
-            <NavBarLink
-              type="desktop"
-              href={REGISTER_ADMIN_PAGE}
-              active={location.pathname === REGISTER_ADMIN_PAGE}
-            >
-              Register Admin
-            </NavBarLink>
-            <NavBarLink type="desktop" href={LOGIN_PAGE}>
-              <Button type="primary">Login</Button>
-            </NavBarLink>
-            {/* <NavBarLink type="desktop" href={LOGIN_PAGE}>
-              <Button type="primary">Log out</Button>
-            </NavBarLink> */}
+            {user ? (
+              <>
+                <NavBarLink
+                  type="desktop"
+                  href={REGISTER_PHARMACIST_PAGE}
+                  active={location.pathname === REGISTER_PHARMACIST_PAGE}
+                >
+                  Register Pharmacist
+                </NavBarLink>
+                <NavBarLink
+                  type="desktop"
+                  href={REGISTER_ADMIN_PAGE}
+                  active={location.pathname === REGISTER_ADMIN_PAGE}
+                >
+                  Register Admin
+                </NavBarLink>
+                <NavBarLink type="desktop" href={LOGIN_PAGE} onClick={logout}>
+                  <Button type="primary">Log out</Button>
+                </NavBarLink>
+              </>
+            ) : (
+              <NavBarLink type="desktop" href={LOGIN_PAGE}>
+                <Button type="primary">Login</Button>
+              </NavBarLink>
+            )}
           </ul>
         </div>
         <button
@@ -77,18 +87,23 @@ const NavBar: FC<NavBarProps> = () => {
           </div>
           <div className="flex-col">
             <ul>
-              <NavBarLink type="mobile" href={REGISTER_PHARMACIST_PAGE}>
-                Register Pharmacist
-              </NavBarLink>
-              <NavBarLink type="mobile" href={REGISTER_ADMIN_PAGE}>
-                Register Admin
-              </NavBarLink>
-              <NavBarLink type="mobile" href={LOGIN_PAGE}>
-                <Button type="primary">Login</Button>
-              </NavBarLink>
-              {/* <NavBarLink type="mobile" href={LOGIN_PAGE}>
-                <Button type="primary">Logout</Button>
-              </NavBarLink> */}
+              {user ? (
+                <>
+                  <NavBarLink type="mobile" href={REGISTER_PHARMACIST_PAGE}>
+                    Register Pharmacist
+                  </NavBarLink>
+                  <NavBarLink type="mobile" href={REGISTER_ADMIN_PAGE}>
+                    Register Admin
+                  </NavBarLink>
+                  <NavBarLink type="mobile" href={LOGIN_PAGE}>
+                    <Button type="primary">Logout</Button>
+                  </NavBarLink>
+                </>
+              ) : (
+                <NavBarLink type="mobile" href={LOGIN_PAGE}>
+                  <Button type="primary">Login</Button>
+                </NavBarLink>
+              )}
             </ul>
           </div>
         </div>
