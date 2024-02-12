@@ -1,18 +1,23 @@
 import { FC, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 
 import BrandLogo from '@components/atoms/BrandLogo';
 import NavBarLink from '@components/atoms/NavBarLink';
+import Button from '@components/atoms/Button';
 
 import {
   HOME_PAGE,
   LOGIN_PAGE,
+  REGISTER_ADMIN_PAGE,
   REGISTER_PHARMACIST_PAGE,
 } from '@constants/routes';
 
 export interface NavBarProps {}
 
 const NavBar: FC<NavBarProps> = () => {
+  const location = useLocation();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -23,16 +28,27 @@ const NavBar: FC<NavBarProps> = () => {
       <div className="flex items-center justify-between w-full h-full px-4 tablet:px-10 desktop:px-20">
         <BrandLogo link={HOME_PAGE} />
         <div>
-          <ul className="item-center hidden text-brown300 tablet:flex desktop:flex">
-            <NavBarLink type="desktop" href={HOME_PAGE}>
-              Home
-            </NavBarLink>
-            <NavBarLink type="desktop" href={REGISTER_PHARMACIST_PAGE}>
+          <ul className="hidden item-center text-brown300 tablet:flex desktop:flex">
+            <NavBarLink
+              type="desktop"
+              href={REGISTER_PHARMACIST_PAGE}
+              active={location.pathname === REGISTER_PHARMACIST_PAGE}
+            >
               Register Pharmacist
             </NavBarLink>
-            <NavBarLink type="desktop" href={LOGIN_PAGE}>
-              Login
+            <NavBarLink
+              type="desktop"
+              href={REGISTER_ADMIN_PAGE}
+              active={location.pathname === REGISTER_ADMIN_PAGE}
+            >
+              Register Admin
             </NavBarLink>
+            <NavBarLink type="desktop" href={LOGIN_PAGE}>
+              <Button type="primary">Login</Button>
+            </NavBarLink>
+            {/* <NavBarLink type="desktop" href={LOGIN_PAGE}>
+              <Button type="primary">Log out</Button>
+            </NavBarLink> */}
           </ul>
         </div>
         <button
@@ -61,15 +77,18 @@ const NavBar: FC<NavBarProps> = () => {
           </div>
           <div className="flex-col">
             <ul>
-              <NavBarLink type="mobile" href={HOME_PAGE}>
-                Home
-              </NavBarLink>
               <NavBarLink type="mobile" href={REGISTER_PHARMACIST_PAGE}>
                 Register Pharmacist
               </NavBarLink>
-              <NavBarLink type="mobile" href={LOGIN_PAGE}>
-                Login
+              <NavBarLink type="mobile" href={REGISTER_ADMIN_PAGE}>
+                Register Admin
               </NavBarLink>
+              <NavBarLink type="mobile" href={LOGIN_PAGE}>
+                <Button type="primary">Login</Button>
+              </NavBarLink>
+              {/* <NavBarLink type="mobile" href={LOGIN_PAGE}>
+                <Button type="primary">Logout</Button>
+              </NavBarLink> */}
             </ul>
           </div>
         </div>

@@ -8,6 +8,7 @@ import LoginPage from '@pages/login';
 import Custom404Page from '@pages/not-found';
 import ResetPasswordPage from '@pages/reset-password';
 import RegisterPharmacistPage from '@pages/register-pharmacist';
+import RegisterAdminPage from '@pages/register-admin';
 
 export const router = createBrowserRouter([
   {
@@ -48,6 +49,17 @@ export const router = createBrowserRouter([
           {
             path: '',
             element: <RegisterPharmacistPage />,
+          },
+        ],
+      },
+      // Route: '/register-admin'
+      {
+        path: 'register-admin',
+        element: <RootLayout withNavBar withFooter />,
+        children: [
+          {
+            path: '',
+            element: <RegisterAdminPage />,
           },
         ],
       },

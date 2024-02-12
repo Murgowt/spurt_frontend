@@ -5,17 +5,32 @@ export interface NavBarLinkProps {
   type: 'mobile' | 'desktop';
   href: string;
   children: ReactNode;
+  active?: boolean;
   onClick?: () => void;
 }
 
-const NavBarLink: FC<NavBarLinkProps> = ({ type, href, children, onClick }) => {
+const NavBarLink: FC<NavBarLinkProps> = ({
+  type,
+  href,
+  children,
+  active,
+  onClick,
+}) => {
   return (
-    <Link to={href} onClick={onClick}>
+    <Link
+      to={href}
+      onClick={onClick}
+      className="flex items-center duration-150 ease-in-out "
+    >
       {type === 'mobile' && (
-        <li className="py-4 text-lg font-semibold">{children}</li>
+        <li className="py-4 text-lg font-medium">{children}</li>
       )}
       {type === 'desktop' && (
-        <li className="ml-10 font-semibold">{children}</li>
+        <li
+          className={`ml-10 font-medium hover:underline ${active && 'underline'}`}
+        >
+          {children}
+        </li>
       )}
     </Link>
   );
