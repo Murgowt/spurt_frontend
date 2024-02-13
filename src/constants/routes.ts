@@ -6,5 +6,4 @@ export const REGISTER_PHARMACIST_PAGE = '/register-pharmacist';
 export const REGISTER_ADMIN_PAGE = '/register-admin';
 
 // Backend Endpoints
-export const LOGIN_ENDPOINT = '/login/';
-export const RESET_PASSWORD_ENDPOINT = '/resetPassword/';
+export const LOGIN_ENDPOINT = '/api/admin/login/';

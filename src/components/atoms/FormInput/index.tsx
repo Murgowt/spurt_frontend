@@ -29,7 +29,7 @@ const FormInput: FC<FormInputProps> = ({
   const error = errors[name]?.message as string | undefined;
 
   return (
-    <div className="flex flex-col max-w-md py-3 my-4 gap-y-1 w-52 desktop:py-2 desktop:my-4 tablet:w-96 desktop:w-80">
+    <div className="flex flex-col max-w-md py-3 my-4 gap-y-1 w-64 desktop:py-2 desktop:my-4 tablet:w-96 desktop:w-80">
       <label
         className="font-semibold text-purple-300 text-md tablet:text-lg desktop:text-md desktop:font-medium"
         htmlFor={label}

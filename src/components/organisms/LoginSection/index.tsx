@@ -6,6 +6,7 @@ import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 
 import { loginSchema } from '@validations/auth';
 import { useAuthStore } from '@store/authStore';
+import { loginRequest } from '@services/auth';
 
 import Button from '@components/atoms/Button';
 import FormInput from '@components/atoms/FormInput';
@@ -32,23 +33,31 @@ const LoginSection: FC<LoginSectionProps> = () => {
 
   const onSubmit = async (data: FieldValues) => {
     try {
-      // TODO: Add API call
+      const res = await loginRequest(data?.email, data?.password);
 
-      // eslint-disable-next-line no-console
-      console.log(data);
+      if (res.status === 200) {
+        setFormError('');
+        setIsInvalidCred(false);
 
-      setAuthToken('loginResponse.token');
-      setUser({
-        name: {
-          first: 'loginResponse.firstName',
-          last: 'loginResponse.lastName',
-        },
-        email: 'loginResponse.email',
-      });
+        // eslint-disable-next-line no-console
+        console.log(res);
+
+        setAuthToken('loginResponse.token');
+        setUser({
+          name: {
+            first: 'loginResponse.firstName',
+            last: 'loginResponse.lastName',
+          },
+          email: 'loginResponse.email',
+        });
+      }
 
       navigate(HOME_PAGE);
     } catch (error) {
       if (isAxiosError(error)) {
+        // eslint-disable-next-line no-console
+        console.log(error);
+
         const status = error.response?.status;
         if (status === 401) {
           setIsInvalidCred(true);
@@ -61,11 +70,23 @@ const LoginSection: FC<LoginSectionProps> = () => {
         setIsInvalidCred(false);
         setFormError(ERRORS.SERVER_ERROR);
       }
+
+      navigate(HOME_PAGE);
+
+      // TODO: Remove this after CORS fix
+      setAuthToken('loginResponse.token');
+      setUser({
+        name: {
+          first: 'loginResponse.firstName',
+          last: 'loginResponse.lastName',
+        },
+        email: 'loginResponse.email',
+      });
     }
   };
 
   return (
-    <div className="flex flex-col justify-center items-center gap-y-2 h-max">
+    <div className="flex flex-col justify-center items-center h-full gap-y-10">
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
           <FormInput
@@ -84,9 +105,11 @@ const LoginSection: FC<LoginSectionProps> = () => {
             disabled={isLoading}
             hasError={isInvalidCred}
           />
-          <Button isLoading={isLoading} type="primary" submitType>
-            Sign In
-          </Button>
+          <div className="mt-10">
+            <Button isLoading={isLoading} type="primary" submitType>
+              Sign In
+            </Button>
+          </div>
           {formError !== '' && (
             <div className="flex justify-center text-xs text-center">
               <ErrorMessage errMessage={formError} iconRequired />
