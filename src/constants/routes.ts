@@ -7,3 +7,5 @@ export const PAYMENT_HISTORY_PAGE = '/payment-history';
 
 // Backend Endpoints
 export const LOGIN_ENDPOINT = '/admin/login/';
+export const REGISTER_ADMIN_ENDPOINT = '/admin/signup';
+export const REGISTER_PHARMACIST_ENDPOINT = '/admin/signup';

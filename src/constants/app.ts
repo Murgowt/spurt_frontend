@@ -11,4 +11,6 @@ export const MESSAGES = {
   TRY_AGAIN: 'Please Try Again',
   GO_DASHBOARD: 'Go to Dashboard',
   GO_LOGIN: 'Go to Login Page',
+  ADMIN_CREATED: 'Admin created successfully',
+  PHARMACIST_CREATED: 'Pharmacist created successfully',
 };
