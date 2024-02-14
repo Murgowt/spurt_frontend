@@ -10,6 +10,13 @@ export default ({ mode }) => {
   return defineConfig({
     server: {
       port: parseInt(process.env.VITE_PORT),
+      proxy: {
+        '/api': {
+          target: 'http://51.20.55.14:8000/',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
     },
     resolve: {
       alias: {

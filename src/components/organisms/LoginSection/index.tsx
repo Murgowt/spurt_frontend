@@ -42,6 +42,7 @@ const LoginSection: FC<LoginSectionProps> = () => {
         // eslint-disable-next-line no-console
         console.log(res);
 
+        // TODO: Set store data after backend fix
         setAuthToken('loginResponse.token');
         setUser({
           name: {
@@ -71,9 +72,9 @@ const LoginSection: FC<LoginSectionProps> = () => {
         setFormError(ERRORS.SERVER_ERROR);
       }
 
+      // TODO: Remove this after CORS fix
       navigate(HOME_PAGE);
 
-      // TODO: Remove this after CORS fix
       setAuthToken('loginResponse.token');
       setUser({
         name: {

@@ -4,15 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@store/authStore';
 
 import SeoComponent from '@components/atoms/SeoComponent';
-import RegisterAdminSection from '@components/organisms/RegisterAdminSection';
+import PaymentHistorySection from '@components/organisms/PaymentHistorySection';
 
 import { LOGIN_PAGE } from '@constants/routes';
 
 import styles from './index.module.css';
 
-export interface RegisterAdminPageProps {}
+export interface PaymentHistoryPageProps {}
 
-const RegisterAdminPage: FC<RegisterAdminPageProps> = () => {
+const PaymentHistoryPage: FC<PaymentHistoryPageProps> = () => {
   const navigate = useNavigate();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const user = useAuthStore((state) => state.user);
@@ -25,14 +25,14 @@ const RegisterAdminPage: FC<RegisterAdminPageProps> = () => {
 
   return (
     <>
-      <SeoComponent title="Register Admin" href="register-admin" />
+      <SeoComponent title="Payment History" href="payment-history" />
       <div
-        className={`${styles.registerAdminSection} px-4 tablet:px-10 desktop:px-20`}
+        className={`${styles.paymentHistorySection} px-4 tablet:px-10 desktop:px-20`}
       >
-        <RegisterAdminSection />
+        <PaymentHistorySection />
       </div>
     </>
   );
 };
 
-export default RegisterAdminPage;
+export default PaymentHistoryPage;

@@ -6,9 +6,9 @@ import RootLayout from '@layouts/RootLayout';
 import HomePage from '@pages/home';
 import LoginPage from '@pages/login';
 import Custom404Page from '@pages/not-found';
-import ResetPasswordPage from '@pages/reset-password';
 import RegisterPharmacistPage from '@pages/register-pharmacist';
 import RegisterAdminPage from '@pages/register-admin';
+import PaymentHistoryPage from '@pages/payment-history';
 
 export const router = createBrowserRouter([
   {
@@ -63,14 +63,14 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      // Route: '/reset-password'
+      // Route: '/payment-history'
       {
-        path: 'reset-password',
+        path: 'payment-history',
         element: <RootLayout withNavBar withFooter />,
         children: [
           {
             path: '',
-            element: <ResetPasswordPage />,
+            element: <PaymentHistoryPage />,
           },
         ],
       },

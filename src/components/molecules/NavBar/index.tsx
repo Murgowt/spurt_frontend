@@ -11,6 +11,7 @@ import { useAuthStore } from '@store/authStore';
 import {
   HOME_PAGE,
   LOGIN_PAGE,
+  PAYMENT_HISTORY_PAGE,
   REGISTER_ADMIN_PAGE,
   REGISTER_PHARMACIST_PAGE,
 } from '@constants/routes';
@@ -49,6 +50,13 @@ const NavBar: FC<NavBarProps> = () => {
                   active={location.pathname === REGISTER_ADMIN_PAGE}
                 >
                   Register Admin
+                </NavBarLink>
+                <NavBarLink
+                  type="desktop"
+                  href={PAYMENT_HISTORY_PAGE}
+                  active={location.pathname === PAYMENT_HISTORY_PAGE}
+                >
+                  Payment History
                 </NavBarLink>
                 <NavBarLink type="desktop" href={LOGIN_PAGE} onClick={logout}>
                   <Button type="primary">Log out</Button>
@@ -94,6 +102,9 @@ const NavBar: FC<NavBarProps> = () => {
                   </NavBarLink>
                   <NavBarLink type="mobile" href={REGISTER_ADMIN_PAGE}>
                     Register Admin
+                  </NavBarLink>
+                  <NavBarLink type="mobile" href={PAYMENT_HISTORY_PAGE}>
+                    Payment History
                   </NavBarLink>
                   <NavBarLink type="mobile" href={LOGIN_PAGE}>
                     <Button type="primary">Logout</Button>
