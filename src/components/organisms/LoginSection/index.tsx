@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { isAxiosError } from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, FormProvider, useForm } from 'react-hook-form';
 
@@ -22,6 +22,8 @@ const LoginSection: FC<LoginSectionProps> = () => {
 
   const setAuthToken = useAuthStore((state) => state.setAuthToken);
   const setUser = useAuthStore((state) => state.setUser);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
 
   const [isInvalidCred, setIsInvalidCred] = useState(false);
   const [formError, setFormError] = useState('');
@@ -39,30 +41,23 @@ const LoginSection: FC<LoginSectionProps> = () => {
         setFormError('');
         setIsInvalidCred(false);
 
-        // eslint-disable-next-line no-console
-        console.log(res);
+        const loginResponse = res.data.data;
 
-        // TODO: Set store data after backend fix
-        setAuthToken('loginResponse.token');
+        setAuthToken(loginResponse?.email);
         setUser({
           name: {
-            first: 'loginResponse.firstName',
-            last: 'loginResponse.lastName',
+            first: loginResponse.firstName,
           },
-          email: 'loginResponse.email',
+          email: loginResponse.email,
         });
       }
-
       navigate(HOME_PAGE);
     } catch (error) {
       if (isAxiosError(error)) {
-        // eslint-disable-next-line no-console
-        console.log(error);
-
-        const status = error.response?.status;
-        if (status === 401) {
+        const status = error.response?.data?.status;
+        if (status === 401 || status === 403) {
           setIsInvalidCred(true);
-          setFormError(error.response?.data?.message);
+          setFormError(ERRORS.INVALID_CRED);
         } else {
           setIsInvalidCred(false);
           setFormError(ERRORS.SERVER_ERROR);
@@ -71,23 +66,12 @@ const LoginSection: FC<LoginSectionProps> = () => {
         setIsInvalidCred(false);
         setFormError(ERRORS.SERVER_ERROR);
       }
-
-      // TODO: Remove this after CORS fix
-      navigate(HOME_PAGE);
-
-      setAuthToken('loginResponse.token');
-      setUser({
-        name: {
-          first: 'loginResponse.firstName',
-          last: 'loginResponse.lastName',
-        },
-        email: 'loginResponse.email',
-      });
     }
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-full gap-y-10">
+    <div className="flex flex-col items-center justify-center h-full gap-y-10">
+      {isAuthenticated && user && <Navigate to={HOME_PAGE} />}
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(onSubmit)}>
           <FormInput

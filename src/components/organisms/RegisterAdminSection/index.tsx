@@ -45,7 +45,7 @@ const RegisterAdminSection: FC<RegisterAdminSectionProps> = () => {
     } catch (error) {
       setFormSuccess('');
       if (isAxiosError(error)) {
-        const status = error.response?.status;
+        const status = error.response?.data.status;
         if (status === 401 || status === 403) {
           setFormError(error.response?.data?.message);
         } else {

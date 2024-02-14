@@ -106,8 +106,8 @@ const NavBar: FC<NavBarProps> = () => {
                   <NavBarLink type="mobile" href={PAYMENT_HISTORY_PAGE}>
                     Payment History
                   </NavBarLink>
-                  <NavBarLink type="mobile" href={LOGIN_PAGE}>
-                    <Button type="primary">Logout</Button>
+                  <NavBarLink type="mobile" href={LOGIN_PAGE} onClick={logout}>
+                    <Button type="primary">Log out</Button>
                   </NavBarLink>
                 </>
               ) : (

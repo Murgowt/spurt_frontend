@@ -12,7 +12,7 @@ export default ({ mode }) => {
       port: parseInt(process.env.VITE_PORT),
       proxy: {
         '/api': {
-          target: 'http://51.20.55.14:8000/',
+          target: process.env.VITE_BACKEND_URL,
           changeOrigin: true,
           secure: false,
         },

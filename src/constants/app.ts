@@ -13,4 +13,5 @@ export const MESSAGES = {
   GO_LOGIN: 'Go to Login Page',
   ADMIN_CREATED: 'Admin created successfully',
   PHARMACIST_CREATED: 'Pharmacist created successfully',
+  NO_HISTORY: 'No payment history for this pharmacist',
 };
